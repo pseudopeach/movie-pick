@@ -1,0 +1,9 @@
+<header>
+  <div>
+    Logged in as <%= session[:name] %> : <%= session[:user_id] %>
+  </div>
+
+  <div>
+    <%= link_to "Log Out", controller: :users, action: :logout %>
+  </div>
+</header>

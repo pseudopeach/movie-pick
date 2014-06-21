@@ -1,0 +1,94 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+html, body{
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+body{
+margin:0px;
+padding: 0px;
+}
+
+header{
+    background-color: black;
+    color: #BBBBBB;
+    height: 70px;
+}
+header a, header a:visited{
+    color: white;
+}
+h2{font-size: 24px}
+h3{font-size: 16px}
+h4{font-size: 14px}
+article.choice {
+    display: inline-block;
+    vertical-align:top;
+    width: 380px;
+    height:800px;
+    margin:20px 0px 20px 20px;
+}
+article.choice p{
+    margin:10px;
+}
+
+article.choice .movie-summary{
+    height:100px;
+    overflow: scroll;
+}
+
+ul.movie-attributes{
+    list-style: none;
+}
+
+ul.movie-attributes li{
+    margin:5px 0px 0px;
+}
+
+.movie-attribute{
+    font-size: 12px;
+}
+.movie-attribute.name{
+    font-weight: bold;
+}
+article.choice > label{
+    display: block;
+    padding: 10px;
+
+}
+.profile-radio{display: none}
+.profile-radio:checked + label{
+    background-color: #EFEFEF;
+    border:#999999 2px solid;
+}
+
+.movie-poster{
+    width:220px;
+    height: 380px;
+    float: left;
+}
+
+.form-header{
+    height:70px;
+    background-color: #F7F7F7;
+}
+.form-header input{
+    float:right;
+    margin: 10px;
+    height:50px;
+    width: 100px;
+}
+.form-header h1{
+    line-height: 70px;
+    margin: 0;
+}

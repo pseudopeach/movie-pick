@@ -1,0 +1,15 @@
+<section>
+	<% if flash[:notice]%>
+		<div class="notice">
+			<%=flash[notice]%>
+		</div>
+	<% end %>
+	<%= form_for @user do |f| %>
+		<h2>What's your name?</h2>
+		<%= f.text_field :name%>
+		<h3>Can I have your email too?</h3>
+		<%= f.text_field :email%>
+		<br/>
+		<%=f.submit%>
+	<% end %>
+</section>

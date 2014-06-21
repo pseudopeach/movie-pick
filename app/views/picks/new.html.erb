@@ -1,0 +1,60 @@
+<% if @pick_count > 0 %>
+<h3><%= @pick_count %> picks made so far...</h3>
+<% end %>
+
+
+
+
+<%= form_tag picks_path do %>
+    <div class="form-header">
+      <%= submit_tag "Save" %>
+      <h1>Pick One...</h1>
+    </div>
+
+    <% [@choice_a, @choice_b].each do |choice| %>
+        <article class="choice">
+        <%= radio_button_tag "pick" , choice._id, false, class:"profile-radio" %>
+        <label for="pick_<%=choice._id%>">
+
+            <h3 class="movie-title"><%= choice.title %></h3>
+
+            <p class="movie-summary">
+                <%= choice.summary %>
+            </p>
+
+            <%= image_tag choice.image_url, class:"movie-poster", alt:"" %>
+
+
+          <ul class="movie-attributes">
+              <li>
+                <div class="movie-attribute name">
+                  Genre
+                </div>
+                <div class="movie-attribute value">
+                  <%= choice.genre %>
+                </div>
+              </li>
+    
+              <li>
+                <div class="movie-attribute name">
+                    Director
+                </div>
+                <div class="movie-attribute value">
+                    <%= choice.director %>
+                </div>
+              </li>
+              <li>
+                <div class="movie-attribute name">
+                    Stars
+                </div>
+                <div class="movie-attribute value">
+                    <%= choice.stars.join ", " %>
+                </div>
+              </li>
+    
+            </ul>
+    
+        </label>
+        </article>
+    <% end %>
+<% end %>
