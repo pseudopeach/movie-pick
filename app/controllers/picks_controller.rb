@@ -10,7 +10,7 @@ class PicksController < ApplicationController
   #[POST] /pick
   def create
     winner_id = params[:pick]
-    runnerup_id = params[:runnerup] || (params[:both] - [winner_id]).first
+    runnerup_id = params[:runnerup] || (params[:both].values - [winner_id]).first
 
     if @user.add_pick(winner_id, runnerup_id)
       flash[:notice] = "Pick saved."
