@@ -2,16 +2,15 @@
 <h3><%= @pick_count %> picks made so far...</h3>
 <% end %>
 
-
-
+<%= render "layouts/flash" %>
 
 <%= form_tag picks_path do %>
     <div class="form-header">
-      <%= submit_tag "Save" %>
+      <%= submit_tag "Save", class:"choice-submit-button" %>
       <h1>Pick One...</h1>
     </div>
 
-    <% [@choice_a, @choice_b].each do |choice| %>
+    <% [@choice_a, @choice_b].each_with_index do |choice, i| %>
         <article class="choice">
         <%= radio_button_tag "pick" , choice._id, false, class:"profile-radio" %>
         <label for="pick_<%=choice._id%>">
@@ -53,8 +52,26 @@
               </li>
     
             </ul>
-    
+            <div class="clearfix"></div>
         </label>
         </article>
+        <%= hidden_field_tag "both[#{i}]", choice.id %>
     <% end %>
 <% end %>
+
+<script language="JavaScript">
+
+
+  function checkRadios(){
+      var radios = document.getElementsByClassName("profile-radio");
+      var anyClicked = false;
+      for(var i=0;i<radios.length;i++) anyClicked = anyClicked || radios[i].checked;
+      var button = document.getElementsByClassName("choice-submit-button")[0].disabled = !anyClicked;
+  }
+
+  var radios = document.getElementsByClassName("profile-radio");
+  for(var i=0;i<radios.length;i++)
+    radios[i].onchange = checkRadios;
+
+  checkRadios();
+</script>

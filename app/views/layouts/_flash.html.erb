@@ -1,0 +1,4 @@
+<% if flash[:notice] -%>
+    <% css_class = notice + (flash[:notice_class] || "" ) -%>
+    <%= content_tag :section, flash[:notice], class: css_class %>
+<% end -%>

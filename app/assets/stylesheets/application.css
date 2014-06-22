@@ -42,9 +42,24 @@ article.choice p{
     margin:10px;
 }
 
+.clearfix{
+    height:1px;
+    clear: both;
+}
+
 article.choice .movie-summary{
     height:100px;
     overflow: scroll;
+}
+
+.choice-submit-button {
+    background-color: #00dd00;
+    border:none;
+    color:white;
+    font-size: 18px;
+}
+.choice-submit-button:disabled {
+    background-color: #DADADA;
 }
 
 ul.movie-attributes{
@@ -65,7 +80,7 @@ article.choice > label{
     display: block;
     padding: 10px;
 
-}
+}/*   ✓   */
 .profile-radio{display: none}
 .profile-radio:checked + label{
     background-color: #EFEFEF;
@@ -73,9 +88,10 @@ article.choice > label{
 }
 
 .movie-poster{
-    width:220px;
-    height: 380px;
+    width:200px;
+    max-height: 380px;
     float: left;
+    margin:10px;
 }
 
 .form-header{
