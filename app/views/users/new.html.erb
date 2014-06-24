@@ -1,4 +1,4 @@
-<section class="main-content">
+<section class="centered-form">
 	<% if flash[:notice]%>
 		<div class="notice">
 			<%=flash[notice]%>
@@ -9,7 +9,8 @@
 		<%= f.text_field :name%>
 		<h3>Can I have your email too?</h3>
 		<%= f.text_field :email%>
-		<br/>
-		<%=f.submit%>
+		<div>
+		    <%= f.submit "Go", class:"choice-submit-button" %>
+        </div>
 	<% end %>
 </section>

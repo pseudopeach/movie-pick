@@ -1,18 +1,19 @@
 class UsersController < ApplicationController
   before_filter :get_user, except: [:new, :create]
-  
+
   #[GET] /user/new
   def new
     @user = User.new
     
   end
   
-  #[PATCH] /user/
+  #[POST] /user/
   def create
 
     uprm = params[:user]
-    unless @user = User.first(name: uprm[:name])
-      @user = User.create!(name:uprm[:name])
+    name = uprm[:name].downcase
+    unless @user = User.first(name: name)
+      @user = User.create!(uprm)
       @user.prime_reviews(10)
     end
 
