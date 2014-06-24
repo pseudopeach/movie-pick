@@ -24,7 +24,7 @@ class Movie
   validates_presence_of :title
 
   def self.from_seed_file
-    puts "new movie profile requested"
+    logger.debug "new movie profile requested"
     begin
       chosen_line = nil
       File.foreach("/Users/justo/Documents/dev/gable/app/models/movie_titles.json").each_with_index do |line, number|
@@ -40,7 +40,7 @@ class Movie
       return nil
     end
 
-    puts "created #{out.title}"
+    logger.info "created #{out.title}"
     return out
   end
 

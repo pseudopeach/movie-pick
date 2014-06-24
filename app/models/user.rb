@@ -12,8 +12,8 @@ class User
 
   @@AddNewProfileChance = 0.333
 
-  def prime_reviews
-    3.times {add_new_profile_for_review}
+  def prime_reviews(n=3)
+    n.times {add_new_profile_for_review}
     raise "couldn't add 3 profiles!" if reviewed_profiles.length < 3
   end
 
@@ -27,6 +27,13 @@ class User
 
     possible_ids = (Set.new(reviewed_profiles.map{|rp| rp.profile_id}) - exclude).to_a
 
+    #if they are unlucky enough to exhaust all pairs without ever getting new profiles added, handle that
+    if possible_ids.length == 0
+      logger.warn "User #{_id} ran out of pairs"
+      raise Exception.new("Needed new profile couln't be created") unless new_rp = add_new_profile_for_review
+      return [initial.profile, new_rp.profile]
+    end
+
     return [initial.profile, rprofile_from_pid(possible_ids.sample).profile]
   end
 
@@ -34,14 +41,15 @@ class User
     winner_rp = rprofile_from_pid(winner_id)
     runnerup_rp = rprofile_from_pid(runnerup_id)
 
-    throw Exception.new "Profile(s) not in review." unless winner_rp && runnerup_rp
+    raise Exception.new "Profile(s) not in review." unless winner_rp && runnerup_rp
 
     winner_rp.beat(runnerup_rp)
     save!
 
     #chance of adding a new profile to the menu
-    unless options[:no_new_profile]
-      self.add_new_profile_for_review if rand <= @@AddNewProfileChance
+    if !options[:no_new_profile] and rand > @@AddNewProfileChance
+      new_rp = self.add_new_profile_for_review
+      logger.warn("new profile was to be added, but couldn't be created") unless new_rp
     end
 
     return true
@@ -62,13 +70,13 @@ class User
     if profile
       profile.was_reviewed
     else
-      raise "couldn't add new profile"
-      return false
+      return nil
     end
 
     rprofile = ReviewedProfile.new(profile)
     reviewed_profiles << rprofile
-    save
+    save!
+    return rprofile
   end
 
   def pick_count

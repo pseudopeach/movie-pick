@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     uprm = params[:user]
     unless @user = User.first(name: uprm[:name])
       @user = User.create!(name:uprm[:name])
-      @user.prime_reviews
+      @user.prime_reviews(10)
     end
 
     session[:name] = @user.name
