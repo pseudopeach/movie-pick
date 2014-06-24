@@ -88,6 +88,20 @@ article.choice > label{
 .profile-radio:checked + label{
     background-color: #EFEFEF;
     border:#999999 2px solid;
+    position:relative;
+}
+.profile-radio:checked + label::after {
+    content: '✓';
+    display:block;
+    position:absolute;
+    background-color: #00dd00;
+    font-size: 48px;
+    top:-15px;
+    right:-15px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    color:white;
 }
 
 .movie-poster{
