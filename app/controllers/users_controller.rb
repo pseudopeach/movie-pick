@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
     uprm = params[:user]
     name = uprm[:name].downcase
-    unless @user = User.first(name: name)
-      @user = User.create!(uprm)
+    unless @user = User.where(name: name).first
+      @user = User.create!(name: name, email:uprm[:email])
       @user.prime_reviews(10)
     end
 

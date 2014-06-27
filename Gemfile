@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
-gem 'mongo_mapper', '0.13.0.beta2'
-gem 'libv8'
+gem 'mongoid'
+#gem 'libv8'
 gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets

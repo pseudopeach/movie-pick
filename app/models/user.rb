@@ -1,14 +1,11 @@
-require 'mongo_mapper'
-
 class User
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps::Created
 
-  key :name,     String
-  key :email,     String
-   
-  timestamps!
+  field :name,   type:  String
+  field :email,  type:  String
 
-  many :reviewed_profiles, class_name:"ReviewedProfile"
+  embeds_many :reviewed_profiles, class_name:"ReviewedProfile" #, inverse_of: :user
 
   @@AddNewProfileChance = 0.333
 

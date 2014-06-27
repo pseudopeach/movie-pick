@@ -1,23 +1,22 @@
-require 'mongo_mapper'
-
 class Movie
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps::Created
 
-  key :title,     String
-  key :imdb_id,   String
-  key :director, String
-  key :stars, Array
+  #has_many :reviews, class_name: "ReviewedProfile", inverse_of: :profile
 
-  key :image_url, String
-  key :summary,   String
-  key :genre,   String
-  key :year,      String
+  field :title, type: String
+  field :imdb_id, type: String
+  field :director, type: String
+  field :stars, type: Array
 
-  key :normalized_score, Float, default: 0.0
+  field :image_url, type: String
+  field :summary, type: String
+  field :genre, type: String
+  field :year, type: String
 
-  key :review_count, Integer, default:0
+  field :normalized_score, type: Float, default: 0.0
 
-  timestamps!
+  field :review_count, type: Integer, default:0
 
   @@High_Review_Threshold = 5
 
@@ -48,9 +47,9 @@ class Movie
   def self.least_reviewed(options={})
     if(exc = options[:exclude])
       excids = exc.map{|r| r._id}
-      item = Movie.where(:_id.nin => excids).sort(:review_count).limit(1).first
+      item = Movie.not_in(_id: excids).asc(:review_count).limit(1).first
     else
-      item = Movie.sort(:review_count).limit(1).first
+      item = Movie.asc(:review_count).limit(1).first
     end
 
     #can remove - specific to seed file
