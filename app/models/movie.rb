@@ -31,7 +31,7 @@ class Movie
       end
 
       movie_h = JSON.parse chosen_line
-      rails "already stored" if Movie.find(movie_h)
+      raise "already stored" if Movie.where(movie_h).first
 
       out = Movie.new(movie_h)
       out.augment_from_omdb

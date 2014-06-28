@@ -29,6 +29,7 @@ development:
         # retry_interval: 0.25
   # Configure Mongoid specific options. (optional)
   options:
+    raise_not_found_error: false
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false
 
@@ -55,6 +56,8 @@ development:
 
     # Ensure all times are UTC in the app side. (default: false)
     # use_utc: false
+
+
 test:
   sessions:
     default:
@@ -67,3 +70,5 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
+  options:
+    raise_not_found_error: false

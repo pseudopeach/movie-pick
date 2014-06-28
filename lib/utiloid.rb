@@ -9,7 +9,7 @@ module Utiloid
       key_name = (name_s+"_id")
       class_name = options[:class_name]
 
-      attr_accessor key_name
+      field key_name, type:BSON::ObjectId
 
       #getter
       define_method name_s do
@@ -21,7 +21,7 @@ module Utiloid
           value_obj = @ref_cache[name_s]
         else
           #need to look up from db, then cache
-          value_obj = class_name.find(key_value)
+          value_obj = class_name.constantize.find(key_value)
           @ref_cache[name_s] = value_obj
         end
 
