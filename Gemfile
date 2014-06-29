@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.4'
 
 gem 'mongoid'
+gem 'bson_ext'
 #gem 'libv8'
 gem 'rails_12factor', group: :production
 
