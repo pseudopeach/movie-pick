@@ -27,7 +27,6 @@ class Movie
     begin
       chosen_line = nil
       path = Rails.root.join('public').join('movie_titles.json')
-      puts "path is #{path}"
       File.foreach(path).each_with_index do |line, number|
         chosen_line = line if rand < 1.0/(number+1)
       end
